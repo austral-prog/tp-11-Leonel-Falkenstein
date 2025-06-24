@@ -1,21 +1,19 @@
 def read_file_to_dict(filename):
     ventas_dict = {}
-    try:
-        with open(filename, 'r') as file:
-            contenido = file.read().strip()
-            ventas = contenido.split(';')
-            for venta in ventas:
-                if not venta:
-                    continue
-                producto, valor = venta.split(':')
-                valor = float(valor)
-                if producto in ventas_dict:
-                    ventas_dict[producto].append(valor)
-                else:
-                    ventas_dict[producto] = [valor]
-    except FileNotFoundError:
-        print(f"Error: el archivo '{filename}' no existe.")
+    with open(filename, 'r') as file:
+        contenido = file.read().strip()
+        ventas = contenido.split(';')
+        for venta in ventas:
+            if not venta:
+                continue
+            producto, valor = venta.split(':')
+            valor = float(valor)
+            if producto in ventas_dict:
+                ventas_dict[producto].append(valor)
+            else:
+                ventas_dict[producto] = [valor]
     return ventas_dict
+
 
 
 def process_dict(ventas_dict):
